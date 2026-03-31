@@ -1,17 +1,27 @@
 #!/bin/bash
-# Author: ishaanpathak (24BCE10205)
-# Purpose: Disk and Permission Auditor
+# Author: Ishaan Pathak (24BCE10205)
+# Purpose: Audit important directories for size, permissions, and ownership
 
+# List of directories to check
 dirs=("/etc" "/var/log" "/usr/bin" "/home" "/var/www" "/etc/vlc" "/var/log/vlc")
 
 echo "================================================================================"
-echo "                   Vlc AUDIT - DIRECTORY AUDITOR                "
+echo "                 VLC AUDIT - DIRECTORY AUDITOR"
 echo "================================================================================"
+
+# Table header
+printf "%-20s %-10s %-10s %-10s\n" "Directory" "Size" "Perms" "Owner"
+echo "--------------------------------------------------------------------------------"
+
 for dir in "${dirs[@]}"; do
     if [ -d "$dir" ]; then
-        echo -e "$dir\t$(du -sh $dir | cut -f1)\t$(stat -c %a $dir)\t$(stat -c %U $dir)"
+        size=$(du -sh "$dir" 2>/dev/null | cut -f1)
+        perms=$(stat -c %a "$dir")
+        owner=$(stat -c %U "$dir")
+
+        printf "%-20s %-10s %-10s %-10s\n" "$dir" "$size" "$perms" "$owner"
     else
-        echo "$dir does not exist."
+        printf "%-20s %s\n" "$dir" "Not Found"
     fi
 done
 
