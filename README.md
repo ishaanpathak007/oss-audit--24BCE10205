@@ -1,43 +1,47 @@
-# The Open Source Audit: Vlc
+# The Open Source Audit: VLC
 
-**Student Name:** ishaanpathak <br>
-**Registration Number:** 24BCE10205 <br>
-**Project Focus:** Vlc (FOSS Audit)
+**Student Name:** Ishaan Pathak
+**Registration Number:** 24BCE10205
+**Project Focus:** VLC (FOSS Audit)
 
 ## Project Overview
 
-This repository contains a suite of 5 Bash shell scripts designed for a university capstone project to audit Vlc on Linux systems. These scripts automate system identification, package inspection, directory auditing, log analysis, and manifesto generation.
+This project is a collection of five Bash shell scripts created as part of a university capstone. The main goal is to audit VLC on Linux systems in a simple and automated way. Each script focuses on a specific task like checking system details, inspecting installed packages, auditing directories, analyzing logs, and generating a small open-source manifesto.
 
 ## Script Descriptions
 
 ### 1. 01-identify.sh
 
-**Goal:** System Identity Report. Provides a comprehensive overview of the host system, including the Linux distribution, kernel version, current user, home directory, system uptime, and an open-source license message.
+**Purpose:** System Identity Report
+This script gives a quick overview of the system. It shows details like the Linux distribution, kernel version, current user, home directory, and system uptime. It also includes a short open-source license message.
 
 ### 2. 02-packages.sh
 
-**Goal:** FOSS Package Inspector. Detects if Vlc is installed, identifies the system's package manager, and provides philosophy notes about common FOSS tools.
+**Purpose:** FOSS Package Inspector
+This script checks whether VLC is installed on the system and identifies the package manager being used. It also includes some basic notes about commonly used FOSS tools.
 
 ### 3. 03-auditor.sh
 
-**Goal:** Disk and Permission Auditor. Loops through critical system and Vlc-specific directories, reporting their size, ownership, and file permissions.
+**Purpose:** Disk and Permission Auditor
+This script scans important system directories as well as VLC-related directories. It reports their size, ownership, and file permissions in a clear format.
 
 ### 4. 04-logs.sh
 
-**Goal:** Log File Analyzer. Analyzes Vlc log files by searching for specified keywords, counting occurrences, and displaying the last 5 matching entries.
+**Purpose:** Log File Analyzer
+This script looks through VLC log files for specific keywords provided by the user. It counts how many times the keyword appears and shows the last five matching entries.
 
 ### 5. 05-manifesto.sh
 
-**Goal:** Open Source Manifesto Generator. An interactive script that crafts a personalized open-source manifesto based on user input and saves it to a text file.
+**Purpose:** Open Source Manifesto Generator
+This is an interactive script where the user provides input, and the script generates a simple personalized open-source manifesto. The output is saved as a text file.
 
 ---
 
 ## Instructions for Use
-```bash
+
 chmod +x *.sh
 ./01-identify.sh
 ./02-packages.sh
 ./03-auditor.sh
 ./04-logs.sh /var/log/syslog error
 ./05-manifesto.sh
-```
