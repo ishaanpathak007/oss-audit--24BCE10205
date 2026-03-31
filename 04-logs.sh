@@ -1,29 +1,39 @@
 #!/bin/bash
-# Author: ishaanpathak (24BCE10205)
-# Purpose: Log File Analyzer
-# Suggested log path for Vlc: /var/log/vlc.log
+# Author: Ishaan Pathak (24BCE10205)
+# Purpose: Analyze log files for specific keywords
+# Suggested log path for VLC: /var/log/vlc.log
 
 echo "================================================================================"
-echo "                   Vlc AUDIT - LOG FILE ANALYZER             "
+echo "                 VLC AUDIT - LOG FILE ANALYZER"
 echo "================================================================================"
 
 target_log=$1
 keyword=$2
-count=0
 
-echo "Analyzing log file: $target_log"
+# Check if arguments are provided
+if [ -z "$target_log" ] || [ -z "$keyword" ]; then
+    echo "Usage: $0 <log_file> <keyword>"
+    echo "Example: $0 /var/log/syslog error"
+    exit 1
+fi
 
-echo "Searching for keyword: $keyword"
+# Check if file exists
+if [ ! -f "$target_log" ]; then
+    echo "Error: Log file not found!"
+    exit 1
+fi
 
-tail -n 1000 $target_log | while read line; do
-    if echo "$line" | grep -q "$keyword"; then
-        ((count++))
-    fi
-done
+echo "Analyzing log file : $target_log"
+echo "Searching keyword  : $keyword"
+echo "--------------------------------------------------------------------------------"
 
-echo "Found $count occurrences of '$keyword'."
+# Count occurrences (fixed issue)
+count=$(tail -n 1000 "$target_log" | grep -c "$keyword")
 
-echo "Last 5 matches:"
-tail -n 1000 $target_log | grep "$keyword" | tail -n 5
+echo "Total matches found: $count"
+
+echo "--------------------------------------------------------------------------------"
+echo "Last 5 matching entries:"
+tail -n 1000 "$target_log" | grep "$keyword" | tail -n 5
 
 echo "================================================================================"
