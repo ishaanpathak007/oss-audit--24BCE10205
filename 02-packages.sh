@@ -1,28 +1,29 @@
 #!/bin/bash
-# Author: ishaanpathak (24BCE10205)
-# Purpose: FOSS Package Inspector
+# Author: Ishaan Pathak (24BCE10205)
+# Purpose: Check VLC installation and display FOSS details
 
-# Detect Linux distribution and define package name
-if [ -f /etc/debian_version ]; then
-    PACKAGE_NAME="vlc"
-else
-    PACKAGE_NAME="vlc"
-fi
+PACKAGE_NAME="vlc"
 
-# Check installation status and extract version
-if dpkg -s $PACKAGE_NAME &> /dev/null; then
-    echo "================================================================================"
-    echo "                   Vlc AUDIT - PACKAGE INSPECTOR                "
-    echo "================================================================================"
-    echo "Status: $PACKAGE_NAME is INSTALLED on this $(cat /etc/os-release | grep PRETTY_NAME | cut -d '=' -f2-) system."
-    echo "Version: $(dpkg -s $PACKAGE_NAME | grep Version | cut -d ' ' -f2-)"
+echo "================================================================================"
+echo "                 VLC AUDIT - PACKAGE INSPECTOR"
+echo "================================================================================"
+
+# Get OS name
+OS_NAME=$(grep PRETTY_NAME /etc/os-release | cut -d '=' -f2 | tr -d '\"')
+
+# Check if VLC is installed
+if dpkg -s "$PACKAGE_NAME" &> /dev/null; then
+    echo "Status  : $PACKAGE_NAME is INSTALLED on this $OS_NAME system."
+    echo "Version : $(dpkg -s "$PACKAGE_NAME" | grep Version | cut -d ' ' -f2)"
+    
     echo "--------------------------------------------------------------------------------"
     echo "FOSS Philosophy Notes:"
-    echo " - Vlc: A free and open-source media player that plays most multimedia files."
-    echo " - Firefox: A free and open-source web browser that promotes user freedom and privacy."
-    echo " - LibreOffice: A free and open-source office suite that provides an alternative to proprietary software."
-    echo " - GIMP: A free and open-source raster graphics editor that offers a wide range of features and tools."
+    echo " - VLC         : A free and open-source media player that supports almost all formats."
+    echo " - Firefox     : An open-source web browser focused on privacy and user control."
+    echo " - LibreOffice : A powerful open-source office suite as an alternative to paid tools."
+    echo " - GIMP        : An open-source image editor with advanced features."
     echo "================================================================================"
 else
-    echo "$PACKAGE_NAME is NOT installed on this system."
+    echo "Status  : $PACKAGE_NAME is NOT installed on this system."
+    echo "================================================================================"
 fi
