@@ -40,8 +40,13 @@ This is an interactive script where the user provides input, and the script gene
 ## Instructions for Use
 
 chmod +x *.sh
+
 ./01-identify.sh
+
 ./02-packages.sh
+
 ./03-auditor.sh
+
 ./04-logs.sh /var/log/syslog error
+
 ./05-manifesto.sh
