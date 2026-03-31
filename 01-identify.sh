@@ -1,17 +1,20 @@
 #!/bin/bash
-# Author: ishaanpathak (24BCE10205)
-# Purpose: System Identity Report
+# Author: Ishaan Pathak (24BCE10205)
+# Purpose: Display basic system information for VLC audit
 
 echo "================================================================================"
-echo "                   Vlc AUDIT - SYSTEM IDENTITY                   "
+echo "                 VLC AUDIT - SYSTEM IDENTITY REPORT"
 echo "================================================================================"
 
-echo "Linux Distribution: $(cat /etc/os-release | grep PRETTY_NAME | cut -d '=' -f2-)"
-echo "Kernel Version:     $(uname -r)"
-echo "Current User:       $(whoami)"
-echo "Home Directory:     $(pwd)"
-echo "System Uptime:      $(uptime)"
-echo "Current Date/Time:  $(date)"
+# Fetch system details
+echo "Linux Distribution : $(grep PRETTY_NAME /etc/os-release | cut -d '=' -f2 | tr -d '\"')"
+echo "Kernel Version     : $(uname -r)"
+echo "Current User       : $(whoami)"
+echo "Home Directory     : $HOME"
+echo "System Uptime      : $(uptime -p)"
+echo "Current Date/Time  : $(date)"
+
 echo "--------------------------------------------------------------------------------"
-echo "Message: This system runs on Open Source software, providing freedom to study, change, and distribute."
+echo "Note: This system runs on open-source software, giving users the freedom to use,"
+echo "      study, modify, and distribute the software."
 echo "================================================================================"
